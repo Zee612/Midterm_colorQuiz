@@ -15,7 +15,9 @@ const myQuestions = [
       d: "Blue",
     },
 
-    
+
+
+
     correctAnswer: "c"
   },
   {
