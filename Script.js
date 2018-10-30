@@ -1,71 +1,175 @@
-// scripts here:
+// select all elements
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const qImg = document.getElementById("qImg");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const counter = document.getElementById("counter");
+const timeGauge = document.getElementById("timeGauge");
+const progress = document.getElementById("progress");
+const scoreDiv = document.getElementById("scoreContainer");
 
-	function submitQuiz() {
-		console.log('submitted');
+// create our questions
+let questions = [
+    {
+        question : " What color is not shown in the circles?",
+        imgSrc : "img/picture1.png",
+        choiceA : "A.Magentat",
+        choiceB : "B.Green",
+        choiceC : "C.White",
+        correct : "C"
+    },{
+        question : "How many navy squares are shown?",
+        imgSrc : "img/picture2.jpg",
+        choiceA : "A.16",
+        choiceB : "B.10",
+        choiceC : "C.13",
+        correct : "B"
+    },{
+        question : "What color and shape would be next in the top line?",
+        imgSrc : "img/picture3.png",
+        choiceA : "A.Yellow pentagon",
+        choiceB : "B.Blue triangle",
+        choiceC : "C.Red square",
+        correct : "C"
+    },{
+      question: "Is the color of this fish warm-toned or cool-toned?",
+      imgSrc : "img/picture4.jpg",
+      choiceA : "A.Warm-toned",
+      choiceB : "B.Cool-toned",
 
-	// get each answer score
-		function answerScore (qName) {
-			var radiosNo = document.getElementsByName(qName);
+      correct : "B"
 
-			for (var i = 0, length = radiosNo.length; i < length; i++) {
-   				if (radiosNo[i].checked) {
-			// do something with radiosNo
-					var answerValue = Number(radiosNo[i].value);
-				}
-			}
-			// change NaNs to zero
-			if (isNaN(answerValue)) {
-				answerValue = 0;
-			}
-			return answerValue;
-		}
+    },{
+        question : "What color group does this parrot’s feathers belong to?",
+        imgSrc : "img/picture5.jpg",
+        choiceA : "A.Primary colors",
+        choiceB : "B.Secondary colors",
+        choiceC : "C.Tertiary colors",
+        correct : "A"
+    },{
+          question : "What color is the bar in the middle of the picture?",
+          imgSrc : "img/picture6.png",
+          choiceA : "A.It fades from light gray to dark gray",
+          choiceB : "B.It fades from dark gray to light gray",
+          choiceC : "C.It is the same shade of gray         ",
+          correct : "C"
+        }
+];
 
-	// calc score with answerScore function
-		var calcScore = (answerScore('q1') + answerScore('q2') + answerScore('q3') + answerScore('q4'));
-		console.log("CalcScore: " + calcScore); // it works!
+// create some variables
 
-	// function to return correct answer string
-		function correctAnswer (correctStringNo, qNumber) {
-			console.log("qNumber: " + qNumber);  // logs 1,2,3,4 after called below
-			return ("The correct answer for question #" + qNumber + ": &nbsp;<strong>" +
-				(document.getElementById(correctStringNo).innerHTML) + "</strong>");
-			}
+const lastQuestion = questions.length - 1;
+let runningQuestion = 0;
+let count = 0;
+const questionTime = 15; // 10s
+const gaugeWidth = 150; // 150px
+const gaugeUnit = gaugeWidth / questionTime;
+let TIMER;
+let score = 0;
 
-	// print correct answers only if wrong (calls correctAnswer function)
-		if (answerScore('q1') === 0) {
-			document.getElementById('correctAnswer1').innerHTML = correctAnswer('correctString1', 1);
-		}
-		if (answerScore('q2') === 0) {
-			document.getElementById('correctAnswer2').innerHTML = correctAnswer('correctString2', 2);
-		}
-		if (answerScore('q3') === 0) {
-			document.getElementById('correctAnswer3').innerHTML = correctAnswer('correctString3', 3);
-		}
-		if (answerScore('q4') === 0) {
-			document.getElementById('correctAnswer4').innerHTML = correctAnswer('correctString4', 4);
-		}
+// render a question
+function renderQuestion(){
+    let q = questions[runningQuestion];
 
-	// calculate "possible score" integer
-		var questionCountArray = document.getElementsByClassName('question');
+    question.innerHTML = "<p>"+ q.question +"</p>";
+    qImg.innerHTML = "<img src="+ q.imgSrc +">";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+}
 
-		var questionCounter = 0;
-		for (var i = 0, length = questionCountArray.length; i < length; i++) {
-			questionCounter++;
-		}
+start.addEventListener("click",startQuiz);
 
-	// show score as "score/possible score"
-		var showScore = "Your Score: " + calcScore +"/" + questionCounter;
-	// if 4/4, "perfect score!"
-		if (calcScore === questionCounter) {
-			showScore = showScore + "&nbsp; <strong>Perfect Score!</strong>"
-		};
-		document.getElementById('userScore').innerHTML = showScore;
-	}
+// start quiz
+function startQuiz(){
+    start.style.display = "none";
+    renderQuestion();
+    quiz.style.display = "block";
+    renderProgress();
+    renderCounter();
+    TIMER = setInterval(renderCounter,1000); // 1000ms = 1s
+}
 
-$(document).ready(function() {
+// render progress
+function renderProgress(){
+    for(let qIndex = 0; qIndex <= lastQuestion; qIndex++){
+        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
+    }
+}
 
-	$('#submitButton').click(function() {
-		$(this).addClass('hide');
-	});
+// counter render
 
-});
+function renderCounter(){
+    if(count <= questionTime){
+        counter.innerHTML = count;
+        timeGauge.style.width = count * gaugeUnit + "px";
+        count++
+    }else{
+        count = 0;
+        // change progress color to red
+        answerIsWrong();
+        if(runningQuestion < lastQuestion){
+            runningQuestion++;
+            renderQuestion();
+        }else{
+            // end the quiz and show the score
+            clearInterval(TIMER);
+            scoreRender();
+        }
+    }
+}
+
+// checkAnwer
+
+function checkAnswer(answer){
+    if( answer == questions[runningQuestion].correct){
+        // answer is correct
+        score++;
+        // change progress color to green
+        answerIsCorrect();
+    }else{
+        // answer is wrong
+        // change progress color to red
+        answerIsWrong();
+    }
+    count = 0;
+    if(runningQuestion < lastQuestion){
+        runningQuestion++;
+        renderQuestion();
+    }else{
+        // end the quiz and show the score
+        clearInterval(TIMER);
+        scoreRender();
+    }
+}
+
+// answer is correct
+function answerIsCorrect(){
+    document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+}
+
+// answer is Wrong
+function answerIsWrong(){
+    document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+}
+
+// score render
+function scoreRender(){
+    scoreDiv.style.display = "block";
+
+    // calculate the amount of question percent answered by the user
+    const scorePerCent = Math.round(100 * score/questions.length);
+
+    // choose the image based on the scorePerCent
+    let img = (scorePerCent >= 80) ? "img/5.png" :
+              (scorePerCent >= 60) ? "img/4.png" :
+              (scorePerCent >= 40) ? "img/3.png" :
+              (scorePerCent >= 20) ? "img/2.png" :
+              "img/1.png";
+
+    scoreDiv.innerHTML = "<img src="+ img +">";
+    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+}

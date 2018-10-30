@@ -1,106 +1,151 @@
-/* css here */
-
-{
-  border: 1px dotted black;
+body{
+    font-size: 20px;
+    font-family: monospace;
 }
 
-p.question {
-  font-family: Arial, sans-serif;
-	  font-size:20px;
-  color: #2E2E2E;
-  margin-bottom:0px;
+#container{
+    margin : 20px auto;
+    background-color: white;
+    height: 300px;
+    width : 700px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px 0px;
+    position: relative;
+}
+#start{
+    font-size: 1.5em;
+    font-weight: bolder;
+    word-break: break-all;
+    width:100px;
+    height:150px;
+    border : 2px solid lightgrey;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    left:300px;
+    top:50px;
+    color : lightgrey;
+}
+#start:hover{
+    border: 3px solid lightseagreen;
+    color : lightseagreen;
 }
 
-h2.quizHeader {
-  font-family: Arial, sans-serif;
-  font-weight:normal;
-  font-size:25px;
-  line-height: 27px;
-  margin: 24px 0 12px 0;
-  padding: 0 0 4px 0;
-  border-bottom: 1px solid #a2a2a2;
+#qImg{
+    width : 200px;
+    height : 200px;
+    position: absolute;
+    left : 0px;
+    top : 0px;
+}
+#qImg img{
+    width : 200px;
+    height : 200px;
+    border-top-left-radius: 5px;
 }
 
-h2.quizScore{
-  font-family: Arial, sans-serif;
-  font-size:25px;
+#question{
+    width:500px;
+    height : 125px;
+    position: absolute;
+    right:0;
+    top:0;
+}
+#question p{
+    margin : 0;
+    padding : 15px;
+    font-size: 1.25em;
 }
 
-div.quizAnswers{
-  font-family: Arial, sans-serif;
-  font-size:16px;
-  color: #424242;
-  padding: 4px 0 4px 0;
-}
-
-label {
-  font-family: Arial, sans-serif;
-  font-size:14px;
-  color: #424242;
-  vertical-align:top;
-}
-
-input.answer[type="radio"] {
-  margin-bottom: 10px;
-}
-
-input.quizSubmit[type="submit"] {
-  -webkit-background-clip: border-box;
-  -webkit-background-origin: padding-box;
-  -webkit-background-size: auto;
-  -webkit-transition-delay: 0s, 0s;
-  -webkit-transition-duration: 0.2s, 0.2s;
-  -webkit-transition-property: color, background-color;
-  -webkit-transition-timing-function: ease, ease;
-  box-shadow: rgba(0, 0, 0, 0.498039) 0px 0px 5px 0px;
-  color: #ffffff;
-  background-color: #c30b0a;
-  margin: 0;
-  border: 0;
-  outline: 0;
-  text-transform:uppercase;
-  height:35px;
-  width:85px;
-  border: 1px solid #5E5E5E;
-  border-radius:5px;
-
- }
-
-input.quizSubmit[type="submit"]:hover {
-  color: #ffffff;
-  background: #680f11;
-  text-decoration: none;
-}
-
-table {
-  background-color: #F2F2F2;
-	  border:1px solid #BDBDBD;
-  border-radius:5px;
-  padding:10px;
-  padding-left:25px;
-  box-shadow: rgba(0, 0, 0, 0.498039) 0px 0px 1px 0px;
-}
-
-th {
+#choices{
+    width : 480px;
+    position: absolute;
+    right : 0;
+    top : 125px;
+    padding : 10px
 
 }
+.choice{
 
-tr {
-
+    display: inline-table;
+    width : 135px;
+    font-size:  0.735em;
+    text-align: left;
+    border : 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    padding : 5px;
+}
+.choice:hover{
+    border : 2px solid grey;
+    font-weight: bold;
 }
 
-td {
-
+#timer{
+    position: absolute;
+    height : 100px;
+    width : 200px;
+    bottom : 0px;
+    text-align: center;
 }
-
-.submitter {
-	  width:85px;
+#counter{
+    font-size: 3em;
 }
-
-.hide {
-	  display:none;
+#btimeGauge{
+    width : 150px;
+    height : 10px;
+    border-radius: 10px;
+    background-color: lightgray;
+    margin-left : 25px;
 }
-
-
-/*SFS light red = #c30b0a;
-SFS dark red = #9f2026; */
+#timeGauge{
+    height : 10px;
+    border-radius: 10px;
+    background-color: mediumseagreen;
+    margin-top : -10px;
+    margin-left : 25px;
+}
+#progress{
+    width : 500px;
+    position: absolute;
+    bottom : 0px;
+    right : 0px;
+    padding:5px;
+    text-align: right;
+}
+.prog{
+    width : 25px;
+    height : 25px;
+    border: 1px solid #000;
+    display: inline-block;
+    border-radius: 50%;
+    margin-left : 5px;
+    margin-right : 5px;
+}
+#scoreContainer{
+    margin : 20px auto;
+    background-color: white;
+    opacity: 0.8;
+    height: 300px;
+    width : 700px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px 0px;
+    position: relative;
+    display: none;
+}
+#scoreContainer img{
+    position: absolute;
+    top:100px;
+    left:325px;
+}
+#scoreContainer p{
+    position: absolute;
+    display: block;
+    width : 59px;
+    height :59px;
+    top:130px;
+    left:325px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
