@@ -14,6 +14,7 @@ const myQuestions = [
       c: "White",
       d: "Blue",
     },
+    
     correctAnswer: "c"
   },
   {
