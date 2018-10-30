@@ -1,169 +1,71 @@
-//sketch of the quiz.
-const quizContainer = document.getElementById('quiz');
-const resultsContainer = document.getElementById('results');
-const submitButton = document.getElementById('submit');
+// scripts here:
 
-//Use a array to store all the questions.
-const myQuestions = [
-  {//For example.(Replace our questions' content here.)
-    img: "midterm images/picture1.jpg",
-    question: "What color isn’t in a circle?",
-    answers: {
-      a: "Magenta",
-      b: "Green",
-      c: "White",
-      d: "Blue",
-    },
+	function submitQuiz() {
+		console.log('submitted');
 
+	// get each answer score
+		function answerScore (qName) {
+			var radiosNo = document.getElementsByName(qName);
 
+			for (var i = 0, length = radiosNo.length; i < length; i++) {
+   				if (radiosNo[i].checked) {
+			// do something with radiosNo
+					var answerValue = Number(radiosNo[i].value);
+				}
+			}
+			// change NaNs to zero
+			if (isNaN(answerValue)) {
+				answerValue = 0;
+			}
+			return answerValue;
+		}
 
+	// calc score with answerScore function
+		var calcScore = (answerScore('q1') + answerScore('q2') + answerScore('q3') + answerScore('q4'));
+		console.log("CalcScore: " + calcScore); // it works!
 
+	// function to return correct answer string
+		function correctAnswer (correctStringNo, qNumber) {
+			console.log("qNumber: " + qNumber);  // logs 1,2,3,4 after called below
+			return ("The correct answer for question #" + qNumber + ": &nbsp;<strong>" +
+				(document.getElementById(correctStringNo).innerHTML) + "</strong>");
+			}
 
-    correctAnswer: "c"
-  },
-  {
-    img: "midterm images/picture2.png",
-    question: "How many navy squares are shown?",
-    answers: {
-      a: "16",
-      b: "10",
-      c: "13",
-      d: "24",
-    },
-    correctAnswer: "b"
-  },
-  {
-    img: "midterm images/picture3.png",
-    question: "What color and shape would be next in the top line?",
-    answers: {
-      a: "Black square",
-      b: "Yellow pentagon",
-      c: "Blue triangle",
-      d: "Red square",
-    },
-    correctAnswer: "d"
-  },
-  {
-    img: "midterm images/picture4.jpg",
-    question: "Is the color of this fish warm-toned or cool-toned?",
-    answers: {
-      a: "Warm-toned",
-      b: "Cool-toned",
-    },
-    correctAnswer: "b"
-  },
-  {
-    img: "midterm images/picture5.jpg",
-    question: "What color group does this parrot’s feathers belong to?",
-    answers: {
-      a: "Primary colors",
-      b: "Secondary colors",
-      c: "Tertiary colors",
-    },
-    correctAnswer: "a"
-  },
-  {
-    img: "midterm images/picture6.png",
-    question: "What color is the bar in the middle of the picture?",
-    answers: {
-      a: "It fades from light gray to dark gray",
-      b: "It fades from dark gray to light gray",
-      c: "It is the same shade of gray",
-    },
-    correctAnswer: "c"
-  }
-];
+	// print correct answers only if wrong (calls correctAnswer function)
+		if (answerScore('q1') === 0) {
+			document.getElementById('correctAnswer1').innerHTML = correctAnswer('correctString1', 1);
+		}
+		if (answerScore('q2') === 0) {
+			document.getElementById('correctAnswer2').innerHTML = correctAnswer('correctString2', 2);
+		}
+		if (answerScore('q3') === 0) {
+			document.getElementById('correctAnswer3').innerHTML = correctAnswer('correctString3', 3);
+		}
+		if (answerScore('q4') === 0) {
+			document.getElementById('correctAnswer4').innerHTML = correctAnswer('correctString4', 4);
+		}
 
-//interactions of the quiz.
-function buildQuiz(){
-// Set a constant value to output.
-  const output = [];
+	// calculate "possible score" integer
+		var questionCountArray = document.getElementsByClassName('question');
 
-  //Store all the answers in a loop.
-  myQuestions.forEach(
-    (currentQuestion, questionNumber) => {
+		var questionCounter = 0;
+		for (var i = 0, length = questionCountArray.length; i < length; i++) {
+			questionCounter++;
+		}
 
-      const answers = [];
+	// show score as "score/possible score"
+		var showScore = "Your Score: " + calcScore +"/" + questionCounter;
+	// if 4/4, "perfect score!"
+		if (calcScore === questionCounter) {
+			showScore = showScore + "&nbsp; <strong>Perfect Score!</strong>"
+		};
+		document.getElementById('userScore').innerHTML = showScore;
+	}
 
-      for(letter in currentQuestion.answers){
+$(document).ready(function() {
 
-        answers.push(
-          `<label>
-            <input type="radio" name="question${questionNumber}" value="${letter}">
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-          </label>`
-        );
-      }
-// output = Question + Answers.
-      output.push(
-        `<img src = ${currentQuestion.question}><div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join('')} </div>`
-      );
-    }
-  );
+	$('#submitButton').click(function() {
+		$(this).addClass('hide');
+	});
 
-  quizContainer.innerHTML = output.join('');
-}
-
-// interactions of the Result after submitted the quiz.
-function showResults(){
-  const answerContainers = quizContainer.querySelectorAll('.answers');
-
-  //set a counter.
-  let numCorrect = 0;
-
-
-  myQuestions.forEach( (currentQuestion, questionNumber) => {
-
-    //check currentQuestion;
-    const answerContainer = answerContainers[questionNumber];
-    //check the selected radio button;
-    const selector = 'input[name=question'+questionNumber+']:checked';
-    //Get a reference to our selected answer element OR,
-    //if that doesn’t exist,
-    // use an empty object.
-    const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-
-    if(userAnswer===currentQuestion.correctAnswer){
-
-      numCorrect++;
-
-
-      answerContainers[questionNumber].style.color = 'lightgreen';
-    }
-
-    else{
-
-      answerContainers[questionNumber].style.color = 'red';
-    }
-  });
-
-
-  resultsContainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
-}
-
-
-buildQuiz();
-
-
-submitButton.addEventListener('click', showResults);
-
-
-
-
-//other interactions during answer the quiz.
-function handleMouseMove(event){
-    console. log(event.clientX, event.clientY;)
-var background = document.createElement('Div')
-background.style.height = '100vh';
-document.body.appendChild(background);
-background.addEventListener('mousemove', handleMouseMove)
-
-      var x =event.clientX;
-      var y =event.clientY;
-      background.textContent = x + ', ' + y;
-      background.style.backgroundColor = 'rgb('+ x +','+ y + ','100')'
-
-}
+});
