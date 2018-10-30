@@ -5,42 +5,75 @@ const submitButton = document.getElementById('submit');
 
 //Use a array to store all the questions.
 const myQuestions = [
-  {//For example.(Repalce our questions' content here.)
-    question: "Who is the strongest?",
+  {//For example.(Replace our questions' content here.)
+    img: "midterm images/picture1.jpg",
+    question: "What color isn’t in a circle?",
     answers: {
-      a: "Superman",
-      b: "The Terminator",
-      c: "Waluigi, obviously"
+      a: "Magenta",
+      b: "Green",
+      c: "White",
+      d: "Blue",
     },
     correctAnswer: "c"
   },
   {
-    question: "What is the best site ever created?",
+    img: "midterm images/picture2.png",
+    question: "How many navy squares are shown?",
     answers: {
-      a: "SitePoint",
-      b: "Simple Steps Code",
-      c: "Trick question; they're both the best"
+      a: "16",
+      b: "10",
+      c: "13",
+      d: "24",
     },
-    correctAnswer: "c"
+    correctAnswer: "b"
   },
   {
-    question: "...?",
+    img: "midterm images/picture3.png",
+    question: "What color and shape would be next in the top line?",
     answers: {
-      a: "...",
-      b: "...",
-      c: "...",
-      d: "..."
+      a: "Black square",
+      b: "Yellow pentagon",
+      c: "Blue triangle",
+      d: "Red square",
     },
     correctAnswer: "d"
+  },
+  {
+    img: "midterm images/picture4.jpg",
+    question: "Is the color of this fish warm-toned or cool-toned?",
+    answers: {
+      a: "Warm-toned",
+      b: "Cool-toned",
+    },
+    correctAnswer: "b"
+  },
+  {
+    img: "midterm images/picture5.jpg",
+    question: "What color group does this parrot’s feathers belong to?",
+    answers: {
+      a: "Primary colors",
+      b: "Secondary colors",
+      c: "Tertiary colors",
+    },
+    correctAnswer: "a"
+  },
+  {
+    img: "midterm images/picture6.png",
+    question: "What color is the bar in the middle of the picture?",
+    answers: {
+      a: "It fades from light gray to dark gray",
+      b: "It fades from dark gray to light gray",
+      c: "It is the same shade of gray",
+    },
+    correctAnswer: "c"
   }
 ];
 
-buildQuiz();
 //interactions of the quiz.
 function buildQuiz(){
-// Set a constent value to output.
+// Set a constant value to output.
   const output = [];
-console.log(myQuestions)
+
   //Store all the answers in a loop.
   myQuestions.forEach(
     (currentQuestion, questionNumber) => {
@@ -59,13 +92,13 @@ console.log(myQuestions)
       }
 // output = Question + Answers.
       output.push(
-        `<div class="question"> ${currentQuestion.question} </div>
+        `<img src = ${currentQuestion.question}><div class="question"> ${currentQuestion.question} </div>
         <div class="answers"> ${answers.join('')} </div>`
       );
     }
   );
 
-  quizContainer.innerHTML=output.join('');
+  quizContainer.innerHTML = output.join('');
 }
 
 // interactions of the Result after submitted the quiz.
@@ -107,7 +140,7 @@ function showResults(){
 }
 
 
-
+buildQuiz();
 
 
 submitButton.addEventListener('click', showResults);
@@ -116,16 +149,16 @@ submitButton.addEventListener('click', showResults);
 
 
 //other interactions during answer the quiz.
-//function handleMouseMove(event){
-    //console. log(event.clientX, event.clientY;)
-//var background = document.createElement('Div')
-//background.style.height = '100vh';
-//document.body.appendChild(background);
-//background.addEventListener('mousemove', handleMouseMove)
+function handleMouseMove(event){
+    console. log(event.clientX, event.clientY;)
+var background = document.createElement('Div')
+background.style.height = '100vh';
+document.body.appendChild(background);
+background.addEventListener('mousemove', handleMouseMove)
 
-    //  var x =event.clientX;
-    //  var y =event.clientY;
-    //  background.textContent = x + ', ' + y;
-    //  background.style.backgroundColor = 'rgb('+ x +','+ y + ','100')'
+      var x =event.clientX;
+      var y =event.clientY;
+      background.textContent = x + ', ' + y;
+      background.style.backgroundColor = 'rgb('+ x +','+ y + ','100')'
 
-//}
+}
