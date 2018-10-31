@@ -32,16 +32,16 @@ body{
 }
 
 #qImg{
-    width : 400px;
-    height : 400px;
+    width : 320px;
+    height : 320px;
     position: absolute;
     left : 150px;
     top : 10px
     padding:35px;
 }
 #qImg img{
-    width : 400px;
-    height : 400px;
+    width : 320px;
+    height : 320px;
     border-top-left-radius: 10px;
 }
 
@@ -65,7 +65,7 @@ body{
     width : 480px;
     position: absolute;
     right : 100px;
-    top : 300px;
+    top : 240px;
     padding : 10px
 
 }
