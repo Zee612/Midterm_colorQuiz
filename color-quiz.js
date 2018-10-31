@@ -39,7 +39,7 @@ let questions = [
       imgSrc : "img/picture4.jpg",
       choiceA : "A.Warm-toned",
       choiceB : "B.Cool-toned",
-      choiceC:  "C.Neither"
+      choiceC : "C.Neither",
       correct : "B"
 
     },{
