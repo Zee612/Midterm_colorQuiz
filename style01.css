@@ -154,3 +154,45 @@ body{
     font-weight: bold;
     text-align: center;
 }
+
+
+.bkgrndfar {
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-2;
+  height:100%;
+  width:100%;
+  background:linear-gradient(#eee, #aaa);
+}
+
+.bkgrndnear {
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background:radial-gradient(at 50% 50%, blue 1%, aqua 100%);
+  opacity:0;
+  transition: opacity 1s;
+}
+
+a.menulnk {
+  position:relative;
+  text-decoration:none;
+  color:#333;
+  padding: 0 20px;
+  text-align:center;
+  line-height:27px;
+  float:left;
+}
+
+a.menulnk:hover {
+  color:#eee;
+  text-decoration:underline;
+}
+
+/* This transitions child opacity on parent hover */
+a.menulnk:hover .bkgrndnear {
+  opacity:1;
+}
