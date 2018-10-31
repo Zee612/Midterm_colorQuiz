@@ -16,7 +16,7 @@ let questions = [
     {
         question : " What color is not shown in the circles?",
         imgSrc : "img/picture1.png",
-        choiceA : "A.Magentat",
+        choiceA : "A.Magenta",
         choiceB : "B.Green",
         choiceC : "C.White",
         correct : "C"
@@ -39,7 +39,7 @@ let questions = [
       imgSrc : "img/picture4.jpg",
       choiceA : "A.Warm-toned",
       choiceB : "B.Cool-toned",
-
+      choiceC:  "C.Neither"
       correct : "B"
 
     },{
