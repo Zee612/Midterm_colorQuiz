@@ -174,16 +174,16 @@ body{
   width:100%;
   background:radial-gradient(at 50% 50%, blue 1%, aqua 100%);
   opacity:0;
-  transition: opacity 1s;
+  transition: opacity 0.5s;
 }
 
 a.menulnk {
   position:center;
   text-decoration:none;
   color:#333;
-  padding: 0 20px;
+  padding: 10px;
   text-align:center;
-  line-height:27px;
+  line-height:10px;
   float:center;
 }
 

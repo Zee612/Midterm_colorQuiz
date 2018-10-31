@@ -189,18 +189,15 @@ function changeColor(event) {
     event.target.style.backgroundColor = "randomColor()";
 }
 
-
+squareRef.addEventListener("Mousemove", randomColor);
 function randomColor() {
   console.log(event.clientX, event.clientY);
-  var background = document.createElement('Div')
-  var x =event.clientX;
-  var y =event.clientY;
-  background.textContent = x + ', ' + y;
 
-
-    var randomBlue = Math.floor(Math.random() * 255);
+  var x =squareRef.event.clientX;
+  var y =squareRef.event.clientY;
+  var randomBlue = Math.floor(Math.random() * 255);
     //create the string that is the ‘random color’
-    var randomColor = "rgb("+x+","+y+","+randomBlue+")";
+  var randomColor = "rgb("+x+","+y+","+randomBlue+")";
 
     return randomColor;
 }
