@@ -173,3 +173,34 @@ function scoreRender(){
     scoreDiv.innerHTML = "<img src="+ img +">";
     scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
 }
+
+
+
+ var squareRef = document.getElementById("container");
+
+for(var i = 0; i < squareRef.length; i++) {
+
+  console.log(squareRef);
+
+    squareRef[i].addEventListener("Mousemove", changeColor);
+}
+
+function changeColor(event) {
+    event.target.style.backgroundColor = "randomColor()";
+}
+
+
+function randomColor() {
+  console.log(event.clientX, event.clientY);
+  var background = document.createElement('Div')
+  var x =event.clientX;
+  var y =event.clientY;
+  background.textContent = x + ', ' + y;
+
+
+    var randomBlue = Math.floor(Math.random() * 255);
+    //create the string that is the ‘random color’
+    var randomColor = "rgb("+x+","+y+","+randomBlue+")";
+
+    return randomColor;
+}
