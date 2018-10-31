@@ -6,23 +6,23 @@ body{
 #container{
     margin : 20px auto;
     background-color: white;
-    height: 300px;
-    width : 700px;
+    height: 600px;
+    width : 1400px;
     border-radius: 5px;
     box-shadow: 0px 5px 15px 0px;
     position: relative;
 }
 #start{
-    font-size: 1.5em;
+    font-size: 2.5em;
     font-weight: bolder;
     word-break: break-all;
-    width:100px;
-    height:150px;
+    width:200px;
+    height:300px;
     border : 2px solid lightgrey;
     text-align: center;
     cursor: pointer;
     position: absolute;
-    left:300px;
+    left:600px;
     top:50px;
     color : lightgrey;
 }
@@ -32,36 +32,40 @@ body{
 }
 
 #qImg{
-    width : 200px;
-    height : 200px;
+    width : 400px;
+    height : 400px;
     position: absolute;
-    left : 0px;
-    top : 0px;
+    left : 200px;
+    top : 10px
+    padding:35px;
 }
 #qImg img{
-    width : 200px;
-    height : 200px;
-    border-top-left-radius: 5px;
+    width : 400px;
+    height : 400px;
+    border-top-left-radius: 10px;
 }
 
 #question{
     width:500px;
     height : 125px;
     position: absolute;
-    right:0;
+
+    right:150px;
+    left:55px:
     top:0;
 }
 #question p{
     margin : 0;
-    padding : 15px;
-    font-size: 1.25em;
+    padding : 45px;
+    font-size: 2em;
+  
 }
 
 #choices{
     width : 480px;
     position: absolute;
-    right : 0;
-    top : 125px;
+    right : 150px;
+    top : 300px;
     padding : 10px
 
 }
@@ -69,11 +73,12 @@ body{
 
     display: inline-table;
     width : 135px;
-    font-size: 0.735em;
+    font-size: 1.03em;
     text-align: left;
     border : 1px solid grey;
     border-radius: 5px;
     cursor: pointer;
+
     padding : 5px;
 }
 .choice:hover{
