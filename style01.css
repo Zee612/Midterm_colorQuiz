@@ -178,18 +178,17 @@ body{
 }
 
 a.menulnk {
-  position:relative;
+  position:center;
   text-decoration:none;
   color:#333;
   padding: 0 20px;
   text-align:center;
   line-height:27px;
-  float:left;
+  float:center;
 }
 
 a.menulnk:hover {
   color:#eee;
-  text-decoration:underline;
 }
 
 /* This transitions child opacity on parent hover */
